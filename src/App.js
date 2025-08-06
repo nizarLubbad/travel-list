@@ -3,6 +3,7 @@ export default function App() {
     <div className="app">
       <Logo />
       <Form />
+      <PackingList />
     </div>
   );
 }
@@ -17,4 +18,8 @@ function Form() {
       <h3>What do you need for your 🥰 trip?</h3>
     </div>
   );
+}
+
+function PackingList() {
+  return <div className="list">Packing List Section</div>;
 }
