@@ -4,6 +4,7 @@ export default function App() {
       <Logo />
       <Form />
       <PackingList />
+      <Stats />
     </div>
   );
 }
@@ -22,4 +23,12 @@ function Form() {
 
 function PackingList() {
   return <div className="list">Packing List Section</div>;
+}
+
+function Stats() {
+  return (
+    <div className="stats">
+      🎒 You have X items on your list, and you already packed (X%)
+    </div>
+  );
 }
