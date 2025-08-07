@@ -51,6 +51,25 @@ h3 {
   font-size: 2.4rem;
 }
 
+button,
+select,
+input {
+  background-color: #ffebb3;
+  color: #5a3e2b;
+  font-family: inherit;
+  border: none;
+  border-radius: 10rem;
+  padding: 1.2rem 3.2rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.add-form button {
+  text-transform: uppercase;
+  background-color: #76c7ad;
+}
+
 .list {
   background-color: #5a3e2b;
   color: #ffebb3;
