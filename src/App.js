@@ -7,11 +7,30 @@ const initialItems = [
 ];
 
 export default function App() {
+  /**
+   *
+   * Lifting state up (Form (child) -> App (parent)).
+   *
+   * This is useful when multiple siblings component need access to the same state
+   *
+   * We need this pattern in the first place as a direct consequence of React one-way data flow.
+   *
+   */
+
+  const [items, setItem] = useState([]);
+
+  function handleAddItems(item) {
+    // This is not allowed in React because it mutates the existing array (React prefers immutability).
+    // setItem((item) => item.push(item));
+
+    setItem((items) => [...items, item]);
+  }
+
   return (
     <div className="app">
       <Logo />
-      <Form />
-      <PackingList />
+      <Form onAddItems={handleAddItems} />
+      <PackingList items={items} />
       <Stats />
     </div>
   );
@@ -21,15 +40,9 @@ function Logo() {
   return <h1>🏝️ Far Away 🎒</h1>;
 }
 
-function Form() {
+function Form({ onAddItems }) {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [items, setItem] = useState([]);
-
-  function handleAddItems(item) {
-    // setItem((item) => item.push(item)); // This is not allowed in React
-    setItem((item) => [...items, item]);
-  }
 
   // React will pass the event object to the handleSubmit function when a submit event occurs
   function handleSubmit(e) {
@@ -38,7 +51,7 @@ function Form() {
     if (!description) return;
 
     const newItem = { id: Date.now(), description, quantity, packed: false };
-    handleAddItems(newItem);
+    onAddItems(newItem);
     console.log(newItem);
 
     setDescription("");
@@ -84,11 +97,11 @@ function Form() {
   );
 }
 
-function PackingList() {
+function PackingList({ items }) {
   return (
     <div className="list">
       <ul>
-        {initialItems.map((item) => (
+        {items.map((item) => (
           <Item item={item} key={item.id} />
         ))}
       </ul>
